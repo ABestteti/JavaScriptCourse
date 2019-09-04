@@ -12,6 +12,7 @@ botaoAdicionar.addEventListener("click", function (event) {
 
     tabela.appendChild(pacienteTr);
 
+    // Clear form afpter form submit
     form.reset();
 
 });
@@ -48,4 +49,28 @@ function montaTd(pDado, pClasse ) {
     td.classList.add(pClasse);
 
     return td;
+}
+
+function validaPaciente(pPaciente) {
+    if (pPaciente.altura >= 0 && pPaciente.altura < 3.0) {
+        return true;
+    }
+}
+
+function validaPeso(pPeso) {
+    if (pPeso > 0 && pPeso <= 260) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function validaAltura(pAltura) {
+    if (pAltura > 0 && pAltura <= 3.0) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
