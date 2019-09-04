@@ -4,32 +4,48 @@ botaoAdicionar.addEventListener("click", function (event) {
 
     var form = document.querySelector("#form-adiciona");
 
-    var nome    = form.nome.value;
-    var peso    = form.peso.value;
-    var altura  = form.altura.value;
-    var gordura = form.gordura.value;
+    var paciente = obtemPacienteDoFormulario(form);
 
-    var pacienteTr = document.createElement("tr");
-
-    var nomeTd    = document.createElement("td");
-    var pesoTd    = document.createElement("td");
-    var alturaTd  = document.createElement("td");
-    var gorduraTd = document.createElement("td");
-    var imcTd     = document.createElement("td");
-
-    nomeTd.textContent    = nome;
-    pesoTd.textContent    = peso;
-    alturaTd.textContent  = altura;
-    gorduraTd.textContent = gordura;
-    imcTd.textContent     = calculaImc(peso, altura);
-
-    pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-    pacienteTr.appendChild(imcTd);
-
+    var pacienteTr = montaTr(paciente);
+    
     var tabela = document.querySelector("#tabela-pacientes");
+
     tabela.appendChild(pacienteTr);
 
+    form.reset();
+
 });
+
+function obtemPacienteDoFormulario(pForm) {
+
+    var paciente = {
+        nome: pForm.nome.value,
+        peso: pForm.peso.value,
+        altura: pForm.altura.value,
+        gordura: pForm.gordura.value,
+        imc: calculaImc(pForm.peso.value, pForm.altura.value)
+    }
+
+    return paciente;
+}
+
+function montaTr(pPaciente) {
+    var pacienteTr = document.createElement("tr");
+    pacienteTr.classList.add("paciente");
+
+    pacienteTr.appendChild(montaTd(pPaciente.nome, "info-nome"));
+    pacienteTr.appendChild(montaTd(pPaciente.peso, "info-peso"));
+    pacienteTr.appendChild(montaTd(pPaciente.altura, "info-altura"));
+    pacienteTr.appendChild(montaTd(pPaciente.gordura, "info-gordura"));
+    pacienteTr.appendChild(montaTd(pPaciente.imc, "info-imc"));
+
+    return pacienteTr;
+}
+
+function montaTd(pDado, pClasse ) {
+    var td = document.createElement("td");
+    td.textContent = pDado;
+    td.classList.add(pClasse);
+
+    return td;
+}
