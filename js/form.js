@@ -7,6 +7,13 @@ botaoAdicionar.addEventListener("click", function (event) {
     var paciente = obtemPacienteDoFormulario(form);
 
     var pacienteTr = montaTr(paciente);
+
+    var errors = validaPaciente(paciente);
+    if (error.length > 0) {
+        var mensagemErro = document.querySelector("#mensagem-erro");
+        mensagemErro.textContent = ("Paciente com dados inválidos.");
+        return;
+    }
     
     var tabela = document.querySelector("#tabela-pacientes");
 
@@ -52,25 +59,17 @@ function montaTd(pDado, pClasse ) {
 }
 
 function validaPaciente(pPaciente) {
-    if (pPaciente.altura >= 0 && pPaciente.altura < 3.0) {
-        return true;
-    }
-}
 
-function validaPeso(pPeso) {
-    if (pPeso > 0 && pPeso <= 260) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+    // Errors message array
+    var errors = [];
 
-function validaAltura(pAltura) {
-    if (pAltura > 0 && pAltura <= 3.0) {
-        return true;
+    if (validaPeso(pPaciente.peso)) {
+        erros.push("O peso é inválido.");
     }
-    else {
-        return false;
+
+    if (validaAltura(pPaciente.altura)) {
+        erros.push("A altura é inválida.");
     }
+
+    return errors;
 }
