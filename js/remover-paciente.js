@@ -1,7 +1,7 @@
-var tabela = documento.querySelector("table");
-table.addEventListener("dblclick", function(event){
+var tabela = document.querySelector("table");
+tabela.addEventListener("dblclick", function(event){
 	var alvoEvento = event.target;
 	var paiDoAlvo  = alvoEvento.parentNode;
-
-	paiDoAlvo.remove();
+    paiDoAlvo.classList.add("fadeOut");
+	//paiDoAlvo.remove();
 });
